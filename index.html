@@ -24,13 +24,13 @@
 
           data.addColumn('datetime', 'Time');
           data.addColumn('number', 'Temp');
-          //data.addColumn('number', 'Humidity');
+          data.addColumn('number', 'Humidity');
 
           $.each(results, function (i, row) {
             data.addRow([
               (new Date(row.timestamp)),
               parseFloat(row.temp),
-             // parseFloat(row.humidity)
+              parseFloat(row.humidity)
             ]);
           });
 
