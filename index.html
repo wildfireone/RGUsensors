@@ -69,10 +69,12 @@
           });
 
           var chart = new google.visualization.LineChart($('#chartH').get(0));
-
-          chart.draw(data, {
-            title: 'Humidity/%'
-          });
+			var options = {
+			title: 'Humidity/%',
+			curveType: 'function',
+			};
+			
+          chart.draw(data, options);
 
         });
 
