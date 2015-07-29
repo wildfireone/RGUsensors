@@ -37,8 +37,8 @@
 		  var options = {
 			title: 'Temperature',
 			curveType: 'function',
-			legend: { position: 'none' }
-			
+			legend: { position: 'none' },
+			vAxis: {title: "Temperature/C"}
 			};
           chart.draw(data, options);
 
@@ -132,7 +132,8 @@
 						max:100,
 						min:0},
 					},
-					}
+					},
+			colors: ['blue', 'red'}
 			
 		  };
 		  
@@ -163,8 +164,8 @@
 	<hr>
     <div id="chart" style="width: 100%; height: 300px"></div>
 	<br/>
-	<div id="chartT" style="width: 100%;"></div>
 	<div id="chartH" style="width: 100%;"></div>
+	<div id="chartT" style="width: 100%;"></div>
 	<br/>
 	<a title="https://data.sparkfun.com/streams/3J5xqbLGGqcJQqMor7g8" href="https://data.sparkfun.com/streams/3J5xqbLGGqcJQqMor7g8" target="_blank">Click Here for Data Stream</a>
   </body>
