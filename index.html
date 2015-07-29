@@ -36,7 +36,7 @@
           var chart = new google.visualization.LineChart($('#chartT').get(0));
 
           chart.draw(data, {
-            title: 'SHT1 Test'
+            title: 'Temperature'
           });
 
         });
@@ -71,7 +71,42 @@
           var chart = new google.visualization.LineChart($('#chartH').get(0));
 
           chart.draw(data, {
-            title: 'SHT1 Test'
+            title: 'Humidity'
+          });
+
+        });
+
+      }
+	  
+	  function drawChart() {
+
+        var public_key = '3J5xqbLGGqcJQqMor7g8';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Temp');
+          data.addColumn('number', 'Humidity');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+			  parseFloat(row.temp),
+              parseFloat(row.humidity)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chart').get(0));
+
+          chart.draw(data, {
+            title: 'Humidity and Temperature'
           });
 
         });
@@ -86,6 +121,7 @@
       // call drawChart once google charts is loaded
       google.setOnLoadCallback(drawChartT);
 	  google.setOnLoadCallback(drawChartH);
+	  google.setOnLoadCallback(drawChart);
 
     </script>
     <META HTTP-EQUIV="refresh" CONTENT="60">
@@ -96,7 +132,9 @@
     <h1>SHT1x Project</h1>
 	<h2>Arduino with Ethernet Shield</h2>
 	<hr>
-    <div id="chartT" style="width: 100%;"></div>
+    <div id="chart" style="width: 100%;"></div>
+	<br/>
+	<div id="chartT" style="width: 100%;"></div>
 	<br/>
 	<div id="chartH" style="width: 100%;"></div>
 	<br/>
