@@ -107,7 +107,16 @@
 		  var options = {
 			title: 'Humidity and Temperature',
 			curveType: 'function',
-			legend: { position: 'right' }
+			legend: { position: 'right' },
+			series: {
+				0: {targetAxisIndex: 0},
+				1: {targetAxisIndex: 1}
+			},
+			vAxes: {
+				// Adds titles to each axis.
+				0: {title: 'Humidity/%'},
+				1: {title: 'Temperature/C'}
+			},
 		  }
 		  
           chart.draw(data, options );
