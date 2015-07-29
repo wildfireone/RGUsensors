@@ -34,11 +34,12 @@
           });
 
           var chart = new google.visualization.LineChart($('#chartT').get(0));
-
-          chart.draw(data, {
-            title: 'Temperature/C'
-          });
-
+		  var optinos = {
+			title: 'Temperature/C'
+			curveType: 'function'
+			Legend: {position: 'bottom'}
+		  };
+          chart.draw(data, options);        
         });
 
       }
