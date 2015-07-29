@@ -1,39 +1,168 @@
-<html>
+<html lang="en-GB">
   <head>
-    <script type="text/javascript"
-          src="https://www.google.com/jsapi?autoload={
-            'modules':[{
-              'name':'visualization',
-              'version':'1',
-              'packages':['corechart']
-            }]
-          }"></script>
+    <!-- EXTERNAL LIBS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
 
-    <script type="text/javascript">
-      google.setOnLoadCallback(drawChart);
+    <!-- EXAMPLE SCRIPT -->
+    <script>
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses'],
-          ['2004',  1000,      400],
-          ['2005',  1170,      460],
-          ['2006',  660,       1120],
-          ['2007',  1030,      540]
-        ]);
+      // onload callback
+      function drawChartT() {
 
-        var options = {
-          title: 'Company Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
+        var public_key = '3J5xqbLGGqcJQqMor7g8';
 
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
 
-        chart.draw(data, options);
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Temp');
+        //  data.addColumn('number', 'Humidity');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.temp),
+            //  parseFloat(row.humidity)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chartT').get(0));
+		  var options = {
+			title: 'Temperature/C',
+			curveType: 'function',
+			};
+          chart.draw(data, options);
+
+        });
+
       }
+	  
+	  function drawChartH() {
+
+        var public_key = '3J5xqbLGGqcJQqMor7g8';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          //data.addColumn('number', 'Temp');
+          data.addColumn('number', 'Humidity');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+            //  parseFloat(row.temp),
+              parseFloat(row.humidity)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chartH').get(0));
+			var options = {
+			title: 'Humidity/%',
+			curveType: 'function',
+			};
+			
+          chart.draw(data, options);
+
+        });
+
+      }
+	  
+	  function drawChart() {
+
+        var public_key = '3J5xqbLGGqcJQqMor7g8';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Temp/C');
+          data.addColumn('number', 'Humidity/%');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+			  parseFloat(row.temp),
+              parseFloat(row.humidity)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chart').get(0));
+		  var options = {
+			title: 'Humidity and Temperature',
+			curveType: 'function',
+			legend: { position: 'right' },
+			series: {
+				0: {targetAxisIndex: 0},
+				1: {targetAxisIndex: 1}
+			},
+			vAxes: {
+				// Adds titles to each axis.
+				0: {title: 'Temperature/C',
+					viewWindow: {
+						max:50,
+						min:0
+					},
+					},
+				1: {title: 'Humidity/%',
+					viewWindow: {
+						max:100,
+						min:0},
+					},
+					}	
+			
+		  };
+		  
+          chart.draw(data, options );
+
+        });
+
+      }
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChartT);
+	  google.setOnLoadCallback(drawChartH);
+	  google.setOnLoadCallback(drawChart);
+
     </script>
+    <META HTTP-EQUIV="refresh" CONTENT="60">
+	<title>SHT1 Stream</title>
   </head>
   <body>
-    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+    <body style="background-color:aqua">
+    <h1>SHT1x Project</h1>
+	<h2>Arduino with Ethernet Shield</h2>
+	<hr>
+    <div id="chart" style="width: 100%;"></div>
+	<br/>
+	<div id="chartT" style="width: 100%;"></div>
+	<br/>
+	<div id="chartH" style="width: 100%;"></div>
+	<br/>
+	<a title="https://data.sparkfun.com/streams/3J5xqbLGGqcJQqMor7g8" href="https://data.sparkfun.com/streams/3J5xqbLGGqcJQqMor7g8" target="_blank">Click Here for Data Stream</a>
   </body>
 </html>
