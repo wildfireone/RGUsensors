@@ -35,11 +35,12 @@
 
           var chart = new google.visualization.LineChart($('#chartT').get(0));
 		  var optinos = {
-			title: 'Temperature/C'
-			curveType: 'function'
-			Legend: {position: 'bottom'}
+			
 		  };
-          chart.draw(data, options);        
+          chart.draw(data, {
+			title: 'Temperature/C'
+		  };
+		  
         });
 
       }
@@ -73,6 +74,7 @@
 
           chart.draw(data, {
             title: 'Humidity/%'
+			Legend: {position: 'bottom'}
           });
 
         });
