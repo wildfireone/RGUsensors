@@ -36,7 +36,7 @@
           var chart = new google.visualization.LineChart($('#chartT').get(0));
 
           chart.draw(data, {
-            title: 'Temperature/°C'
+            title: 'Temperature/C'
           });
 
         });
@@ -106,7 +106,9 @@
           var chart = new google.visualization.LineChart($('#chart').get(0));
 
           chart.draw(data, {
-            title: 'Humidity and Temperature'
+            title: 'Humidity and Temperature',
+			curveType: 'function',
+			legend: { position: 'bottom' }
           });
 
         });
