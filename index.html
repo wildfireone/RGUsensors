@@ -104,12 +104,13 @@
           });
 
           var chart = new google.visualization.LineChart($('#chart').get(0));
-
-          chart.draw(data, {
-            title: 'Humidity and Temperature',
+		  var options = {
+			title: 'Humidity and Temperature',
 			curveType: 'function',
 			legend: { position: 'right' }
-          });
+		  }
+		  
+          chart.draw(data, options );
 
         });
 
