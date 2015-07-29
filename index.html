@@ -38,7 +38,8 @@
 			title: 'Temperature',
 			curveType: 'function',
 			legend: { position: 'none' },
-			vAxis: {title: "Temperature/C"}
+			vAxis: {title: "Temperature/C"},
+			colors: ['blue']
 			};
           chart.draw(data, options);
 
@@ -76,7 +77,8 @@
 			title: 'Humidity',
 			curveType: 'function',
 			legend: { position: 'none' },
-			vAxis: {title: "Humidity/%"}
+			vAxis: {title: "Humidity/%"},
+			colors: ['red']
 			};
 			
           chart.draw(data, options);
@@ -134,7 +136,7 @@
 					},
 					},
 					},
-			colors: ['blue', 'black']
+			colors: ['blue', 'red']
 			}	
 			
 			chart.draw(data, options );
