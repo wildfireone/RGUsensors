@@ -115,10 +115,13 @@
 			vAxes: {
 				// Adds titles to each axis.
 				0: {title: 'Temperature/C',
-					min:15
+					viewWindowMode:'explicit',
+					viewWindow:{
+								max:50,
+								min:15
 				},
 				1: {title: 'Humidity/%',
-					min:0
+					max:100
 				}
 			},
 		  }
