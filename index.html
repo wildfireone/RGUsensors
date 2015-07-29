@@ -114,14 +114,13 @@
 			},
 			vAxes: {
 				// Adds titles to each axis.
-				0: {title: 'Temperature/C'},
-				1: {title: 'Humidity/%'}
-			},
-			 vAxis: {
-				viewWindow: {
-					max:100
+				0: {title: 'Temperature/C',
+					min:15
+				},
+				1: {title: 'Humidity/%',
+					min:0
 				}
-			} 
+			},
 		  }
 		  
           chart.draw(data, options );
