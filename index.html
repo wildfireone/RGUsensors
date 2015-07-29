@@ -34,10 +34,11 @@
           });
 
           var chart = new google.visualization.LineChart($('#chartT').get(0));
-
-          chart.draw(data, {
-            title: 'Temperature/C'
-          });
+		  var options = {
+			title: 'Temperature/C',
+			curveType: 'function',
+			};
+          chart.draw(data, options);
 
         });
 
