@@ -1,16 +1,6 @@
 <?php
 error_reporting(E_ALL);
-$running = true;
-print $running;
-if($_GET["switch"]== "off"){
-	$running = false;
-}
-else if($_GET["switch"]== "on"){
-	$running = true;
-}
-
-if($_GET["check"] == "check")
-{
-	echo $running;
-}
+$data = file_get_contents(https://data.sparkfun.com/streams/3J5xqbLGGqcJQqMor7g8.json); 
+$json = json_decode($data);
+var_dump($json);
 ?>
