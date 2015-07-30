@@ -1,6 +1,6 @@
 <?php
 $running = true;
-$_GET["switch"];
+echo running;
 if($_GET["switch"]== "off"){
 	running = false;
 }
