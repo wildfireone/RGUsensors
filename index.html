@@ -164,6 +164,17 @@
 			url,'popUpWindow','height=300,width=400,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
 		}
 
+	  (function() {
+
+  document.getElementById("target").onclick = function() {
+    var wnd = window.open("http://stackoverflow.com");
+    setTimeout(function() {
+      wnd.close();
+    }, 5000);
+    return false;
+  };
+
+})();
       // load chart lib
       google.load('visualization', '1', {
         packages: ['corechart']
@@ -222,6 +233,6 @@
 	</div> 
 	<br/>
 	<a href="JavaScript:newPopup('http://www.quackit.com/javascript/examples/sample_popup.cfm');">Open a popup window</a>
-		
+	<a href="#" id="target">Click to open popup</a>	
    </body>
 </html>
