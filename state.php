@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 $running = true;
 echo running;
 if($_GET["switch"]== "off"){
