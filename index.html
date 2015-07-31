@@ -160,13 +160,10 @@
 			if (results[0].humidity == "End")
 		{
 			status = "Sensor Status: " + "Off";
-			document.getElementById("On").innerHTML = <div class="start_end"><a href="http://data.sparkfun.com/input/3J5xqbLGGqcJQqMor7g8?private_key=oZBlg6JaagtkaRexAplo&humidity=Start&temp=Start" target="_blank">Turn Sensor On</a></div>
 		}else{
 		status = "Sensor Status: " + "On";
-		document.getElementById("On").innerHTML = <div class="start_end"><a href="http://data.sparkfun.com/input/3J5xqbLGGqcJQqMor7g8?private_key=oZBlg6JaagtkaRexAplo&humidity=Start&temp=Start" target="_blank">No Press</a></div>
 		}
 		document.getElementById("status").innerHTML = status;
-		
 		});
 		//
 			
@@ -225,8 +222,8 @@
 	<a title="https://data.sparkfun.com/streams/3J5xqbLGGqcJQqMor7g8" href="https://data.sparkfun.com/streams/3J5xqbLGGqcJQqMor7g8" target="_blank">Click Here for Data Stream</a>
     <br/>
 	<br/>
-	<p id="On"></p>
 	<div class="start_end">
+		<a href="http://data.sparkfun.com/input/3J5xqbLGGqcJQqMor7g8?private_key=oZBlg6JaagtkaRexAplo&humidity=Start&temp=Start" target="_blank">Turn On Sensor</a>
 		<a href="http://data.sparkfun.com/input/3J5xqbLGGqcJQqMor7g8?private_key=oZBlg6JaagtkaRexAplo&humidity=End&temp=End" target="_blank">Turn Off Sensor</a>
 	</div>
 	<p id="status"></p>
