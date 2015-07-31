@@ -148,11 +148,8 @@
          }
 
 
-	  
-	   var public_key = '3J5xqbLGGqcJQqMor7g8';
-		var status = "";
-		var link = "<div class='start_end'><a href='http://data.sparkfun.com/input/3J5xqbLGGqcJQqMor7g8?private_key=oZBlg6JaagtkaRexAplo&humidity=Start&temp=Start' target='_blank'>Turn On Sensor</a><a href='http://data.sparkfun.com/input/3J5xqbLGGqcJQqMor7g8?private_key=oZBlg6JaagtkaRexAplo&humidity=End&temp=End' target='_blank'>Turn Off Sensor</a></div>";
-						
+	    var public_key = '3J5xqbLGGqcJQqMor7g8';
+		var status = "";				
 		var jsonData = $.ajax({
           url: 'https://data.sparkfun.com/output/' + public_key + '.json',
           data: {'gte' :{'timestamp' : 'now - 1440 minutes'}},
@@ -166,7 +163,6 @@
 		status = "Sensor Status: " + "On";
 		}
 		document.getElementById("status").innerHTML = status;
-		document.getElementById("link").innerHTML = link;
 		});
 		//
 			
@@ -224,7 +220,10 @@
 	<br/>
 	<a title="https://data.sparkfun.com/streams/3J5xqbLGGqcJQqMor7g8" href="https://data.sparkfun.com/streams/3J5xqbLGGqcJQqMor7g8" target="_blank">Click Here for Data Stream</a>
     <br/>
-	<p id="link"></p>
+	<div class='start_end'>
+		<a href='http://data.sparkfun.com/input/3J5xqbLGGqcJQqMor7g8?private_key=oZBlg6JaagtkaRexAplo&humidity=Start&temp=Start' target='_blank'>Turn On Sensor</a>
+		<a href='http://data.sparkfun.com/input/3J5xqbLGGqcJQqMor7g8?private_key=oZBlg6JaagtkaRexAplo&humidity=End&temp=End' target='_blank'>Turn Off Sensor</a>
+	</div>
 	</br>
 	<p id="status"></p>
    </body>
