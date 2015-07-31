@@ -151,13 +151,18 @@
 	  
 	  
 		var status = "";
-	    $json = file_get_contents('https://data.sparkfun.com/output/3J5xqbLGGqcJQqMor7g8.json');
-		$obj = json_decode($json,true);
-		if ($obj[0]["humidity"] == "End")
-		{
-			status = "Off";
-		}
-		document.getElementById("status").innerHTML = status;
+		var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {'gte' :{'timestamp' : 'now - 1440 minutes'}},
+          dataType: 'jsonp',
+        }).done(function (results) {
+			console.log(results[0]);
+		});
+		//if ($obj[0]["humidity"] == "End")
+		//{
+		//	status = "Off";
+		//}
+		//document.getElementById("status").innerHTML = status;
 			
 		
 	    
