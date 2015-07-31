@@ -156,7 +156,7 @@
           data: {'gte' :{'timestamp' : 'now - 1440 minutes'}},
           dataType: 'jsonp',
         }).done(function (results) {
-			console.log(results[0]);
+			//console.log(results[0].humidity);
 			if (results[0].humidity == "End")
 		{
 			status = "Off";
@@ -226,7 +226,6 @@
 		<a href="http://data.sparkfun.com/input/3J5xqbLGGqcJQqMor7g8?private_key=oZBlg6JaagtkaRexAplo&humidity=Start&temp=Start" target="_blank">Turn On Sensor</a>
 		<a href="http://data.sparkfun.com/input/3J5xqbLGGqcJQqMor7g8?private_key=oZBlg6JaagtkaRexAplo&humidity=End&temp=End" target="_blank">Turn Off Sensor</a>
 	</div>
-	<p>Sensor Status: </p>
-	<p id="status"></p>
+	<p id="status">Sensor Status:</p>
    </body>
 </html>
