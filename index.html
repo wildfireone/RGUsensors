@@ -159,9 +159,9 @@
 			//console.log(results[0].humidity);
 			if (results[0].humidity == "End")
 		{
-			status = "Off";
+			status = "Sensor Status: " + "Off";
 		}else {
-		status = "On";
+		status = "Sensor Status: " + "On";
 		}
 		document.getElementById("status").innerHTML = status;
 		});
