@@ -152,7 +152,7 @@
 		var Vstatus = "Sensor Status Unknown";				
 		var jsonData = $.ajax({
           url: 'https://data.sparkfun.com/output/' + public_key + '.json',
-          data: {'gte' :{'timestamp' : 'now - 1440 minutes'}},
+          data: {page: 1},
           dataType: 'jsonp',
         }).done(function (results) {
 			//console.log(results[0].humidity);
