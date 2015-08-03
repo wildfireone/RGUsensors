@@ -146,31 +146,7 @@
 		  });
 		  
        }
-	
-	  window.onload = function Sensor_Status(){
-	    var public_key = '3J5xqbLGGqcJQqMor7g8';
-		var Vstatus = "Status Unknown";				
-		var jsonData = $.ajax({
-          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
-          data: {page: 1},
-          dataType: 'jsonp',
-        }).done(function (results) {
-			//console.log(results[0].humidity);
-			if (results[0].humidity == "End")
-		{
-			Vstatus = "Sensor Status: " + "Off";
-		}else{
-		Vstatus = "Sensor Status: " + "On";
-		}
-		document.getElementById("statID").innerHTML = Vstatus;
-		});
-		
-	  };	
-		
-	  window.onload = function reload() {
-		location.reload();
-	  }
-	    
+	   
 	  
       // load chart lib
       google.load('visualization', '1', {
@@ -230,5 +206,33 @@
 	</div>
 	<br/>
 	<p id="statID"></p>
+	
+	<script>
+	
+		 function Sensor_Status(){
+			var public_key = '3J5xqbLGGqcJQqMor7g8';
+			var Vstatus = "Status Unknown";				
+			var jsonData = $.ajax({
+				url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+				data: {page: 1},
+				dataType: 'jsonp',
+			}).done(function (results) {
+			//console.log(results[0].humidity);
+				if (results[0].humidity == "End")
+				{
+					Vstatus = "Sensor Status: " + "Off";
+				}else{
+					Vstatus = "Sensor Status: " + "On";
+				}
+				document.getElementById("statID").innerHTML = Vstatus;
+			});
+		
+		};	
+		
+		 function reload() {
+			 location.reload();
+	     };
+	 </script>
+	 
    </body>
 </html>
