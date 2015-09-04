@@ -1,0 +1,238 @@
+<html lang="en-GB">
+  <head>
+    <!-- EXTERNAL LIBS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+
+    <!-- EXAMPLE SCRIPT -->
+    <script>
+
+      // onload callback
+      function drawChartT() {
+
+        var public_key = 'aGx4bNWOzVimdQ1JVgp0';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Temp');
+        //  data.addColumn('number', 'Humidity');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+              parseFloat(row.temp),
+            //  parseFloat(row.humidity)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chartT').get(0));
+		  var options = {
+			title: 'Temperature',
+			curveType: 'function',
+			legend: { position: 'none' },
+			vAxis: {title: "Temperature/C"},
+			colors: ['blue']
+			};
+          chart.draw(data, options);
+
+        });
+
+      }
+	  
+	  function drawChartH() {
+
+        var public_key = 'aGx4bNWOzVimdQ1JVgp0';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {page: 1},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          //data.addColumn('number', 'Temp');
+          data.addColumn('number', 'Humidity');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+            //  parseFloat(row.temp),
+              parseFloat(row.humidity)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chartH').get(0));
+			var options = {
+			title: 'Humidity',
+			curveType: 'function',
+			legend: { position: 'none' },
+			vAxis: {title: "Humidity/%"},
+			colors: ['red']
+			};
+			
+          chart.draw(data, options);
+
+        });
+
+      }
+	  
+	  function drawChart() {
+
+        var public_key = 'aGx4bNWOzVimdQ1JVgp0';
+
+        // JSONP request
+        var jsonData = $.ajax({
+          url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+          data: {'gte' :{'timestamp' : 'now - 1440 minutes'}},
+          dataType: 'jsonp',
+        }).done(function (results) {
+
+          var data = new google.visualization.DataTable();
+
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Temp');
+          data.addColumn('number', 'Humidity');
+
+          $.each(results, function (i, row) {
+            data.addRow([
+              (new Date(row.timestamp)),
+			  parseFloat(row.temp),
+              parseFloat(row.humidity)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chart').get(0));
+		  var options = {
+			title: 'Humidity and Temperature',
+			curveType: 'function',
+			//explorer{axis: 'horizontal'},
+			legend: { position: 'bottom' },
+			series: {
+				0: {targetAxisIndex: 0},
+				1: {targetAxisIndex: 1}
+			},
+			vAxes: {
+				// Adds titles to each axis.
+				0: {title: 'Temperature/C',
+					viewWindow: {
+						max:35,
+						min:-5
+					},
+					},
+				1: {title: 'Humidity/%',
+					viewWindow: {
+						max:100,
+						min:0
+					},
+					},
+					},
+			colors: ['blue', 'red'],
+			
+			}	
+			
+			chart.draw(data, options );
+			
+		  });
+		  
+       }
+	   
+	  window.onload = function Sensor_Status(){
+		var public_key = 'aGx4bNWOzVimdQ1JVgp0';
+		var Vstatus = "Status Unknown";				
+		var jsonData = $.ajax({
+			url: 'https://data.sparkfun.com/output/' + public_key + '.json',
+			data: {page: 1},
+			dataType: 'jsonp',
+		}).done(function (results) {
+		//console.log(results[0].humidity);
+			if (results[0].humidity == "End")
+			{
+				Vstatus = "Sensor Status: " + "Off";
+			}else{
+				Vstatus = "Sensor Status: " + "On";
+			}
+			document.getElementById("statID").innerHTML = Vstatus;
+		});
+		
+	  };
+
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChartT);
+	  google.setOnLoadCallback(drawChartH);
+	  google.setOnLoadCallback(drawChart);
+
+    </script>
+    <META HTTP-EQUIV="refresh" CONTENT="60">
+	<meta charset=utf-8 />
+	<title>SHT1 Stream</title>
+	<style type="text/css">
+		.start_end a {
+		text-decoration:none;
+			width:75px;
+			height:50px;
+			border-color:black;
+			border-top:2px solid;
+			border-bottom:2px solid;
+			border-right:2px solid;
+			border-left:2px solid;
+			border-radius:10px 10px 10px;
+			-o-border-radius:10px 10px 10px;
+			-webkit-border-radius:10px 10px 10px;
+			font-family:"Trebuchet MS",Arial, Helvetica, sans-serif;
+			-moz-border-radius:10px 10px 10px;
+			background-color:#293F5E;
+			padding:8px;
+			text-align:center;   
+		}
+		.start_end a:link {color:white;}      
+		.start_end a:visited {color:white;}  
+		.start_end a:hover {color:white;}  
+		.start_end a:active {color:white;}
+	</style>
+  </head>
+  <body>
+    <body style="background-color:aqua">
+    <h1>SHT1x Project</h1>
+	<h2>Arduino with WIFI Shield</h2>
+	<hr>
+    <div id="chart" style="width: 100%; height: 290px"></div>
+	<br/>
+	<div id="chartH" style="width: 100%;"></div>
+	<div id="chartT" style="width: 100%;"></div>
+	<p>
+	<a title="https://data.sparkfun.com/streams/aGx4bNWOzVimdQ1JVgp0" href="https://data.sparkfun.com/streams/aGx4bNWOzVimdQ1JVgp0" target="_blank">Click Here for Data Stream</a>
+	<a title="https://data.sparkfun.com/streams/aGx4bNWOzVimdQ1JVgp0" href="https://data.sparkfun.com/streams/aGx4bNWOzVimdQ1JVgp0" target="_blank"><img src="http://rgusensors.azurewebsites.net/datasparkfun.png" alt="Sparkfun" style="width:81px;height:81px;"></a>
+	</p>
+	<div class="start_end">
+		<a href="http://data.sparkfun.com/input/aGx4bNWOzVimdQ1JVgp0?private_key=KExRq80oz5umJdRK0YM8&humidity=Start&temp=Start" target="_blank" onclick="reload()">Turn On Sensor</a>
+		<a href="http://data.sparkfun.com/input/aGx4bNWOzVimdQ1JVgp0?private_key=KExRq80oz5umJdRK0YM8&humidity=End&temp=End" target="_blank" onclick="reload()">Turn Off Sensor</a>
+	</div>
+	
+	<p id="statID"></p>
+		
+	<script>
+			
+		 function reload() {
+			 location.reload();
+	     };
+		 
+	 </script>
+	 
+   </body>
+</html>
